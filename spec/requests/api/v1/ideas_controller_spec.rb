@@ -47,10 +47,66 @@ describe "Ideas Controller" do
   end
 
   context "edit existing idea" do
+    scenario "successfully update title" do
+      idea = create(:idea, title: "Initial Idea title", body: "initial body")
+      new_title = {title: "New Title"}
 
+      patch "/api/v1/ideas/#{idea.id}", params: {idea: new_title}
+
+      expect(response).to be_success
+      expect(response.status).to eq(204)
+
+      updated_idea = Idea.find(idea.id)
+      expect(updated_idea.title).to eq("New Title")
+    end
+
+    scenario "successfully update body" do
+      idea = create(:idea, title: "Initial Idea title", body: "initial body")
+      new_body = {body: "New Body"}
+
+      patch "/api/v1/ideas/#{idea.id}", params: {idea: new_body}
+
+      expect(response).to be_success
+      expect(response.status).to eq(204)
+
+      updated_idea = Idea.find(idea.id)
+      expect(updated_idea.body).to eq("New Body")
+    end
+
+    scenario "successfully update quality" do
+      idea = create(:idea, title: "Initial Idea title", body: "initial body", quality: 0)
+      new_quality = {quality: 1}
+
+      patch "/api/v1/ideas/#{idea.id}", params: {idea: new_quality}
+
+      expect(response).to be_success
+      expect(response.status).to eq(204)
+
+      updated_idea = Idea.find(idea.id)
+      expect(updated_idea.quality).to eq(1)
+    end
+
+    xscenario "with invalid params, unsuccessfully" do
+      idea = create(:idea, title: "Initial Idea title", body: "initial body")
+      new_title = {title: nil}
+
+      patch "/api/v1/ideas/#{idea.id}", params: {idea: new_title}
+
+      expect(response).to_not be_success
+      expect(response.status).to eq(422)
+      expect(json["errors"]).to eq({"title" => ["can't be blank"]})
+    end
   end
 
   context "delete existing idea" do
+    scenario "successfully" do
+      idea = create(:idea, title: "To be", body: "deleted soon")
+      expect(Idea.count).to eq(1)
 
+      delete "/api/v1/ideas/#{idea.id}"
+
+      expect(response).to be_success
+      expect(Idea.count).to eq(0)
+    end
   end
 end
