@@ -8,7 +8,9 @@ class Ideas extends React.Component {
       return <Idea key={idea.id} idea={idea}/>
     })
     return(
-      <div>
+      <div className="IdeasList">
+        <NewIdeaForm onCreateIdea={this.createNewIdea} />
+        <h2>Ideas</h2>
         {ideas}
       </div>
     )

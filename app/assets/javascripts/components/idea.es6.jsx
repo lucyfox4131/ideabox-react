@@ -7,7 +7,10 @@ class Idea extends React.Component {
   render () {
     const idea = this.state.idea
     return(
-      <div>{idea.title} - {idea.quality}</div>
+      <div className="idea-item">
+        <h3>{idea.title} - {idea.quality}</h3>
+        <p className="idea-body">{idea.body}</p>
+      </div>
     )
   }
 }
