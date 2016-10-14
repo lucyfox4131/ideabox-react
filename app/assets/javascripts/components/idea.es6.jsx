@@ -6,7 +6,7 @@ class Idea extends React.Component {
   render () {
     var idea = this.state.idea
     return(
-      <div>{idea.title}</div>
+      <div>{idea.title} - {idea.body}</div>
     )
   }
 }
