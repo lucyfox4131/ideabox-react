@@ -3,10 +3,11 @@ class Idea extends React.Component {
     super(props);
     this.state = {idea: this.props.idea}
   }
+
   render () {
-    var idea = this.state.idea
+    const idea = this.state.idea
     return(
-      <div>{idea.title} - {idea.body}</div>
+      <div>{idea.title} - {idea.quality}</div>
     )
   }
 }

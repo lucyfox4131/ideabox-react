@@ -1,6 +1,7 @@
 require 'rails_helper'
+# , js: true 
 
-RSpec.feature "Sees all ideas", js: true do
+RSpec.feature "Sees all ideas"do
   context "successfully visits root page" do
     scenario "all ideas displayed" do
       visit root_path
