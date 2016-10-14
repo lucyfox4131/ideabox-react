@@ -4,6 +4,13 @@ class Ideas extends React.Component {
     this.state = {ideas: this.props.ideas};
   }
   render () {
-    return <div>"What about dis???"</div>;
+    const ideas = this.state.ideas.map(function(idea){
+      return <Idea key={idea.id} idea={idea}/>
+    })
+    return(
+      <div>
+        {ideas}
+      </div>
+    )
   }
 }
