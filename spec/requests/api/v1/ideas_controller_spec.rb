@@ -22,7 +22,7 @@ describe "Ideas Controller" do
       expect(response.status).to eq(201)
       expect(json["title"]).to eq("Idea Title")
       expect(json["body"]).to eq("Idea body")
-      expect(json["quality"]).to eq(0)
+      expect(json["quality"]).to eq("Swill")
     end
 
     scenario "without a body, successfully" do
@@ -75,15 +75,15 @@ describe "Ideas Controller" do
 
     scenario "successfully update quality" do
       idea = create(:idea, title: "Initial Idea title", body: "initial body", quality: 0)
-      new_quality = {quality: 1}
+      new_quality = {quality: "Plausible"}
 
       patch "/api/v1/ideas/#{idea.id}", params: {idea: new_quality}
-
+      
       expect(response).to be_success
       expect(response.status).to eq(204)
 
       updated_idea = Idea.find(idea.id)
-      expect(updated_idea.quality).to eq(1)
+      expect(updated_idea.quality).to eq("Plausible")
     end
 
     xscenario "with invalid params, unsuccessfully" do

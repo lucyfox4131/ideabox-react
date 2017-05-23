@@ -7,9 +7,9 @@ RSpec.describe Idea, type: :model do
   end
 
   context "default quality" do
-    it 'defaults to quality of 0' do
+    it 'defaults to quality of Swill' do
       idea = Idea.create(title: "Idea Title", body: "Idea Body")
-      expect(idea.quality).to eq(0)
+      expect(idea.quality).to eq("Swill")
     end
   end
 end
